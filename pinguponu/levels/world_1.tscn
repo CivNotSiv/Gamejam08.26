@@ -1,14 +1,20 @@
 [gd_scene format=3 uid="uid://dar7dpy861ycm"]
 
-[ext_resource type="Texture2D" uid="uid://5rg3pwvwlifm" path="res://textures/WoodFloor051_1K-JPG_Color.jpg" id="1_3hl4r"]
+[ext_resource type="Texture2D" path="res://textures/istockphoto-512453704-612x612.jpg" id="1_1asa0"]
 [ext_resource type="PackedScene" uid="uid://cuj80dylkk77y" path="res://models/tabletennis.tscn" id="1_tbfs4"]
 [ext_resource type="PackedScene" uid="uid://khx7hhse0gc2" path="res://models/paddle.tscn" id="2_viyde"]
 [ext_resource type="Shader" uid="uid://bpekg3jkirhnd" path="res://shaders/pixelize.gdshader" id="4_7ab5j"]
+[ext_resource type="Texture2D" uid="uid://b6kbvb32wcwxs" path="res://textures/Metal028.png" id="5_7ab5j"]
+[ext_resource type="Texture2D" uid="uid://5j5ckbjveo5t" path="res://textures/wall.jpg" id="6_n5ceu"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1asa0"]
-albedo_texture = ExtResource("1_3hl4r")
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_roulp"]
+albedo_texture = ExtResource("1_1asa0")
+uv1_scale = Vector3(12, 12, 12)
+distance_fade_mode = 2
+distance_fade_max_distance = 6.9
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_7q7f3"]
+[sub_resource type="PlaneMesh" id="PlaneMesh_84whp"]
+material = SubResource("StandardMaterial3D_roulp")
 
 [sub_resource type="Environment" id="Environment_7q7f3"]
 
@@ -23,12 +29,40 @@ shader_parameter/pixel_size = 7
 
 [sub_resource type="QuadMesh" id="QuadMesh_7q7f3"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1asa0"]
+albedo_texture = ExtResource("5_7ab5j")
+
+[sub_resource type="PrismMesh" id="PrismMesh_7q7f3"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_84whp"]
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 2.97
+
+[sub_resource type="SphereMesh" id="SphereMesh_7q7f3"]
+material = SubResource("StandardMaterial3D_84whp")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7ab5j"]
+albedo_texture = ExtResource("5_7ab5j")
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_84whp"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bx18w"]
+albedo_texture = ExtResource("6_n5ceu")
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 0.03
+uv1_scale = Vector3(2, 2, 2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_7q7f3"]
+material = SubResource("StandardMaterial3D_bx18w")
+flip_faces = true
+
 [node name="world_1" type="Node3D" unique_id=1190206886]
 
-[node name="floor" type="MeshInstance3D" parent="." unique_id=589843880]
-transform = Transform3D(33.825237, 0, 0, 0, 1, 0, 0, 0, 19.414759, -0.018397331, -4.7683716e-07, -0.01911974)
-material_override = SubResource("StandardMaterial3D_1asa0")
-mesh = SubResource("PlaneMesh_7q7f3")
+[node name="floor" type="MeshInstance3D" parent="." unique_id=2075593944]
+transform = Transform3D(-1.1679685e-06, 0, -32.616592, 0, 1.0000007, 0, 26.720007, 0, -1.4257166e-06, -13.521082, 0, 1.0527878)
+mesh = SubResource("PlaneMesh_84whp")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1529777137]
 environment = SubResource("Environment_7q7f3")
@@ -49,3 +83,51 @@ transform = Transform3D(0.01485694, -0.26549032, 0.963999, 0, 0.9641054, 0.26551
 transform = Transform3D(1.0000002, -9.313226e-10, 1.8626451e-09, 0, 1.0000002, 1.5279511e-09, 0, 6.114351e-08, 1.0000002, -0.0024892911, -0.04914713, -0.1873045)
 material_override = SubResource("ShaderMaterial_84whp")
 mesh = SubResource("QuadMesh_7q7f3")
+
+[node name="light" type="Node3D" parent="." unique_id=1744763052]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0320821, 0)
+
+[node name="fixture" type="MeshInstance3D" parent="light" unique_id=1686339760]
+transform = Transform3D(-4.3711385e-08, 0, 4.35004, 0, 0.30784827, 0, -0.9999999, 0, -1.9014628e-07, 0, 4.2108545, 0)
+material_override = SubResource("StandardMaterial3D_1asa0")
+mesh = SubResource("PrismMesh_7q7f3")
+
+[node name="bulb" type="MeshInstance3D" parent="light/fixture" unique_id=956562858]
+transform = Transform3D(0.5, 0, -3.5527137e-15, 0, 0.9187887, 0, 0, 0, 0.10931317, 6.757379e-11, -0.47711563, -0.00035537785)
+mesh = SubResource("SphereMesh_7q7f3")
+
+[node name="bulb2" type="MeshInstance3D" parent="light/fixture" unique_id=1565870597]
+transform = Transform3D(0.5, 0, -5.3290705e-15, 0, 0.9187887, 0, 0, 0, 0.10931317, -6.895857e-08, -0.47711563, 0.3626606)
+mesh = SubResource("SphereMesh_7q7f3")
+
+[node name="bulb3" type="MeshInstance3D" parent="light/fixture" unique_id=103037751]
+transform = Transform3D(0.5, 0, -5.3290705e-15, 0, 0.9187887, 0, 0, 0, 0.10931317, 7.299047e-08, -0.47711563, -0.38386467)
+mesh = SubResource("SphereMesh_7q7f3")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="light/fixture" unique_id=764643593]
+transform = Transform3D(1.0000001, 4.3711392e-08, 4.3711392e-08, -1.4199003e-07, -1.4199003e-07, 3.2483532, 1.00485025e-08, -0.22988294, -1.00485025e-08, 0, 0, 0)
+light_energy = 3.271
+light_specular = 0.0
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="light/fixture" unique_id=443719494]
+transform = Transform3D(1.0000001, 4.371139e-08, 4.3711392e-08, -1.4199001e-07, -1.4199001e-07, 3.2483532, 1.00485025e-08, -0.22988294, -1.0048502e-08, -6.9284035e-08, 0, 0.36437222)
+light_energy = 3.271
+light_specular = 0.0
+
+[node name="SpotLight3D3" type="SpotLight3D" parent="light/fixture" unique_id=2033675838]
+transform = Transform3D(1.0000001, 4.371139e-08, 4.3711392e-08, -1.4199001e-07, -1.4199001e-07, 3.2483532, 1.00485025e-08, -0.22988294, -1.0048502e-08, 7.266382e-08, 0, -0.3821469)
+light_energy = 3.271
+light_specular = 0.0
+
+[node name="stick" type="MeshInstance3D" parent="light" unique_id=143784082]
+transform = Transform3D(0.2, 0, 0, 0, -1.9001843, 1.7484549e-08, 0, -1.661194e-07, -0.19999993, 0, 6.016021, 0)
+material_override = SubResource("StandardMaterial3D_7ab5j")
+mesh = SubResource("CylinderMesh_84whp")
+
+[node name="ceiling lights" type="DirectionalLight3D" parent="." unique_id=1851907981]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 16.010784, 0)
+light_energy = 0.802
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1822136883]
+transform = Transform3D(50, 0, 0, 0, 39.94749, 0, 0, 0, 50, -14.346382, -1.219245, 0.6355555)
+mesh = SubResource("BoxMesh_7q7f3")
