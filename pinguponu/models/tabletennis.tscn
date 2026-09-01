@@ -1,8 +1,8 @@
 [gd_scene format=4 uid="uid://cuj80dylkk77y"]
 
-[ext_resource type="Texture2D" uid="uid://bnskh6w1mv6nf" path="res://textures/net.png" id="2_ahanh"]
-[ext_resource type="Texture2D" uid="uid://crnihdie35fmx" path="res://textures/tabletennis.png" id="2_cndwk"]
-[ext_resource type="ArrayMesh" uid="uid://dqbdwmftnelx" path="res://net.tres" id="3_ahanh"]
+[ext_resource type="Texture2D" uid="uid://bnskh6w1mv6nf" path="res://textures/table_tennis/net.png" id="2_ahanh"]
+[ext_resource type="Texture2D" uid="uid://crnihdie35fmx" path="res://textures/table_tennis/tabletennis.png" id="2_cndwk"]
+[ext_resource type="ArrayMesh" uid="uid://dqbdwmftnelx" path="res://misc textures/net.tres" id="3_ahanh"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ih47f"]
 resource_name = "Screw1"

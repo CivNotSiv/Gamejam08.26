@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://dar7dpy861ycm"]
+
+[ext_resource type="Texture2D" uid="uid://5rg3pwvwlifm" path="res://textures/WoodFloor051_1K-JPG_Color.jpg" id="1_3hl4r"]
+[ext_resource type="PackedScene" uid="uid://cuj80dylkk77y" path="res://models/tabletennis.tscn" id="1_tbfs4"]
+[ext_resource type="PackedScene" uid="uid://khx7hhse0gc2" path="res://models/paddle.tscn" id="2_viyde"]
+[ext_resource type="Shader" uid="uid://bpekg3jkirhnd" path="res://shaders/pixelize.gdshader" id="4_7ab5j"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1asa0"]
+albedo_texture = ExtResource("1_3hl4r")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_7q7f3"]
+
+[sub_resource type="Environment" id="Environment_7q7f3"]
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_84whp"]
+
+[sub_resource type="Compositor" id="Compositor_roulp"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_84whp"]
+render_priority = 0
+shader = ExtResource("4_7ab5j")
+shader_parameter/pixel_size = 7
+
+[sub_resource type="QuadMesh" id="QuadMesh_7q7f3"]
+
+[node name="world_1" type="Node3D" unique_id=1190206886]
+
+[node name="floor" type="MeshInstance3D" parent="." unique_id=589843880]
+transform = Transform3D(33.825237, 0, 0, 0, 1, 0, 0, 0, 19.414759, -0.018397331, -4.7683716e-07, -0.01911974)
+material_override = SubResource("StandardMaterial3D_1asa0")
+mesh = SubResource("PlaneMesh_7q7f3")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1529777137]
+environment = SubResource("Environment_7q7f3")
+camera_attributes = SubResource("CameraAttributesPractical_84whp")
+compositor = SubResource("Compositor_roulp")
+
+[node name="ImporterMeshInstance3D" type="ImporterMeshInstance3D" parent="." unique_id=598676827]
+
+[node name="tabletennis" parent="." unique_id=1392886218 instance=ExtResource("1_tbfs4")]
+
+[node name="paddle" parent="." unique_id=1687493890 instance=ExtResource("2_viyde")]
+transform = Transform3D(-0.18250343, 0.9832052, 0, -0.9832052, -0.18250343, 0, 0, 0, 1, 3.2253857, 2.405392, -0.6348515)
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=511995007]
+transform = Transform3D(0.01485694, -0.26549032, 0.963999, 0, 0.9641054, 0.26551962, -0.9998896, -0.003944809, 0.014323656, 6.3495035, 4.0597095, 0.0065959394)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Camera3D" unique_id=2140364007]
+transform = Transform3D(1.0000002, -9.313226e-10, 1.8626451e-09, 0, 1.0000002, 1.5279511e-09, 0, 6.114351e-08, 1.0000002, -0.0024892911, -0.04914713, -0.1873045)
+material_override = SubResource("ShaderMaterial_84whp")
+mesh = SubResource("QuadMesh_7q7f3")
