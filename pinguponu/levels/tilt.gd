@@ -6,7 +6,7 @@ extends Node3D
 func _process(delta: float) -> void:
 	var viewport_size := get_viewport().get_visible_rect().size
 	var midpoint_x := viewport_size.x / 2.0
-	var midpoint_y := viewport_size.y / 4.0
+	var midpoint_y := viewport_size.y / 2.0
 	var mouse_x := get_viewport().get_mouse_position().x
 	var mouse_y := get_viewport().get_mouse_position().y
 
@@ -17,5 +17,18 @@ func _process(delta: float) -> void:
 	rotation.z = lerp(
 		rotation.z,
 		-target_rotation_z,
+		1.0 - exp(-smoothness * delta)
+	)
+
+	var viewport_height := get_viewport().get_visible_rect().size.y
+
+	var mouse_position := mouse_y / viewport_height
+	mouse_position = clamp(mouse_position, 0.0, 1.0)
+
+	var target_angle: float = lerp(-67.0, 0.0, mouse_position)
+
+	rotation.x = lerp(
+		rotation.x,
+		deg_to_rad(target_angle),
 		1.0 - exp(-smoothness * delta)
 	)

@@ -2,9 +2,11 @@
 
 [ext_resource type="Texture2D" uid="uid://cgnvin16wbulw" path="res://textures/floor.jpg" id="1_1asa0"]
 [ext_resource type="PackedScene" uid="uid://cuj80dylkk77y" path="res://models/tabletennis.tscn" id="1_tbfs4"]
+[ext_resource type="Script" uid="uid://3wnxnpyyhmrw" path="res://levels/floor.gd" id="2_6r8k1"]
 [ext_resource type="PackedScene" uid="uid://khx7hhse0gc2" path="res://models/paddle.tscn" id="2_viyde"]
 [ext_resource type="Texture2D" uid="uid://1jat2kt721fr" path="res://textures/crowd.png" id="3_n5ceu"]
 [ext_resource type="Shader" uid="uid://bpekg3jkirhnd" path="res://shaders/pixelize.gdshader" id="4_7ab5j"]
+[ext_resource type="Script" uid="uid://115c4ek0y4k" path="res://levels/table.gd" id="5_4aspj"]
 [ext_resource type="Texture2D" uid="uid://b6kbvb32wcwxs" path="res://textures/Metal028.png" id="5_7ab5j"]
 [ext_resource type="Texture2D" uid="uid://5j5ckbjveo5t" path="res://textures/wall.jpg" id="6_n5ceu"]
 [ext_resource type="Script" uid="uid://b3oh35llc2sr6" path="res://models/paddle.gd" id="7_bx18w"]
@@ -38,6 +40,8 @@ stencil_flags = 2
 [sub_resource type="PlaneMesh" id="PlaneMesh_84whp"]
 material = SubResource("StandardMaterial3D_roulp")
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_48lqx"]
+
 [sub_resource type="PlaneMesh" id="PlaneMesh_7q7f3"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xpxyj"]
@@ -63,6 +67,10 @@ material = SubResource("StandardMaterial3D_84whp")
 albedo_texture = ExtResource("5_7ab5j")
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_84whp"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8ttl3"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yppna"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_8ttl3"]
 
@@ -101,9 +109,16 @@ compositor = SubResource("Compositor_roulp")
 transform = Transform3D(50, 0, 0, 0, 39.94749, 0, 0, 0, 50, -14.346382, -1.219245, 0.6355555)
 mesh = SubResource("BoxMesh_7q7f3")
 
-[node name="floor" type="MeshInstance3D" parent="." unique_id=2075593944]
+[node name="floor" type="RigidBody3D" parent="." unique_id=208163002]
+script = ExtResource("2_6r8k1")
+
+[node name="floor" type="MeshInstance3D" parent="floor" unique_id=2075593944]
 transform = Transform3D(-1.1679685e-06, 0, -32.616592, 0, 1.0000007, 0, 26.720007, 0, -1.4257166e-06, -13.521082, 0, 1.0527878)
 mesh = SubResource("PlaneMesh_84whp")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="floor" unique_id=442027190]
+transform = Transform3D(2.396811e-06, 0, 72.2408, 0, 1.0000007, 0, -54.832645, 0, 3.1577463e-06, -17.105967, 0, 1.0527878)
+shape = SubResource("BoxShape3D_48lqx")
 
 [node name="crowd" type="Node3D" parent="." unique_id=1958163842]
 
@@ -183,10 +198,24 @@ light_energy = 6.037
 spot_range = 31.675308
 spot_angle = 54.843742
 
-[node name="tabletennis" parent="." unique_id=1392886218 instance=ExtResource("1_tbfs4")]
+[node name="Table" type="RigidBody3D" parent="." unique_id=1054266150]
+script = ExtResource("5_4aspj")
 
-[node name="paddle" parent="." unique_id=1687493890 instance=ExtResource("2_viyde")]
+[node name="tabletennis" parent="Table" unique_id=1392886218 instance=ExtResource("1_tbfs4")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Table" unique_id=693155041]
+transform = Transform3D(6.6161447, 0, 0, 0, 0.21250033, 0, 0, 0, 3.6923766, 0, 1.7391019, 0)
+shape = SubResource("BoxShape3D_8ttl3")
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="." unique_id=1030323608]
 transform = Transform3D(0.9293762, 0, -0.36913365, 0, 0.9999999, 0, 0.36913365, 0, 0.9293763, 3.2253857, 2.405392, -0.6348515)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D" unique_id=178492984]
+transform = Transform3D(0.35117286, 0.0167153, 0.16746147, -0.07877256, 0.08712185, -0.002079354, -0.14954728, -0.006639051, 0.39433494, 0.10391879, 0.05904126, -0.04127431)
+shape = SubResource("BoxShape3D_yppna")
+
+[node name="paddle" parent="CharacterBody3D" unique_id=1687493890 instance=ExtResource("2_viyde")]
+transform = Transform3D(1, 0, 2.9802322e-08, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 script = ExtResource("7_bx18w")
 
 [node name="Playable_area" type="MeshInstance3D" parent="." unique_id=1386796826]
@@ -201,7 +230,7 @@ transform = Transform3D(0.014856944, -0.26549035, 0.96399903, -8.978932e-10, 0.9
 script = ExtResource("8_8f4wj")
 
 [node name="Camera3D" type="Camera3D" parent="Player_data/Anchor" unique_id=511995007]
-transform = Transform3D(0.99999976, 0, 0, 0, 0.9999997, 0, 0, 0, 0.99999994, 0, 3.8313165, 1.0551643)
+transform = Transform3D(0.9999997, -4.656613e-10, -9.313226e-10, 9.313226e-10, 0.9999997, -2.8685463e-08, -9.313226e-10, 3.0915544e-08, 0.99999994, 1.4901161e-08, 3.8313167, 1.0551643)
 environment = SubResource("Environment_84whp")
 attributes = SubResource("CameraAttributesPractical_ercef")
 compositor = SubResource("Compositor_7q7f3")
