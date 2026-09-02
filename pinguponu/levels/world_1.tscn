@@ -7,6 +7,7 @@
 [ext_resource type="Shader" uid="uid://bpekg3jkirhnd" path="res://shaders/pixelize.gdshader" id="4_7ab5j"]
 [ext_resource type="Texture2D" uid="uid://b6kbvb32wcwxs" path="res://textures/Metal028.png" id="5_7ab5j"]
 [ext_resource type="Texture2D" uid="uid://5j5ckbjveo5t" path="res://textures/wall.jpg" id="6_n5ceu"]
+[ext_resource type="Script" uid="uid://b3oh35llc2sr6" path="res://models/paddle.gd" id="7_bx18w"]
 
 [sub_resource type="Environment" id="Environment_7q7f3"]
 
@@ -180,8 +181,10 @@ spot_angle = 54.843742
 
 [node name="tabletennis" parent="." unique_id=1392886218 instance=ExtResource("1_tbfs4")]
 
-[node name="paddle" parent="." unique_id=1687493890 instance=ExtResource("2_viyde")]
+[node name="paddle" parent="." unique_id=1687493890 node_paths=PackedStringArray("paddle") instance=ExtResource("2_viyde")]
 transform = Transform3D(-0.18250343, 0.9832052, 0, -0.9832052, -0.18250343, 0, 0, 0, 1, 3.2253857, 2.405392, -0.6348515)
+script = ExtResource("7_bx18w")
+paddle = NodePath(".")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=511995007]
 transform = Transform3D(0.01485694, -0.26549032, 0.963999, 0, 0.9641054, 0.26551962, -0.9998896, -0.003944809, 0.014323656, 6.3495035, 4.0597095, 0.0065959394)
