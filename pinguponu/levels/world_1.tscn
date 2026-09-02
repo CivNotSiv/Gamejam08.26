@@ -8,6 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://b6kbvb32wcwxs" path="res://textures/Metal028.png" id="5_7ab5j"]
 [ext_resource type="Texture2D" uid="uid://5j5ckbjveo5t" path="res://textures/wall.jpg" id="6_n5ceu"]
 [ext_resource type="Script" uid="uid://b3oh35llc2sr6" path="res://models/paddle.gd" id="7_bx18w"]
+[ext_resource type="Script" uid="uid://72idn834w2ej" path="res://levels/tilt.gd" id="8_8f4wj"]
+[ext_resource type="Script" uid="uid://c4befumujvm8b" path="res://levels/camera_3d.gd" id="9_4aspj"]
 
 [sub_resource type="Environment" id="Environment_7q7f3"]
 
@@ -62,6 +64,8 @@ albedo_texture = ExtResource("5_7ab5j")
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_84whp"]
 
+[sub_resource type="PlaneMesh" id="PlaneMesh_8ttl3"]
+
 [sub_resource type="Environment" id="Environment_84whp"]
 background_energy_multiplier = 1.95
 glow_enabled = true
@@ -82,7 +86,7 @@ dof_blur_amount = 0.13
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_84whp"]
 render_priority = 0
 shader = ExtResource("4_7ab5j")
-shader_parameter/pixel_size = 7
+shader_parameter/pixel_size = 5
 
 [sub_resource type="QuadMesh" id="QuadMesh_7q7f3"]
 
@@ -119,7 +123,7 @@ mesh = SubResource("PlaneMesh_7q7f3")
 surface_material_override/0 = SubResource("StandardMaterial3D_xpxyj")
 
 [node name="MeshInstance3D4" type="MeshInstance3D" parent="crowd" unique_id=1211565128]
-transform = Transform3D(10.941989, -8.742276e-08, 4.5102468e-07, 9.565791e-07, 4.3711374e-08, -5.1591215, 9.56579e-07, 0.99999976, 2.255123e-07, -23.977974, 5.018544, -13.276488)
+transform = Transform3D(10.941989, -8.742276e-08, 4.5102468e-07, 9.565791e-07, 4.3711374e-08, -5.1591215, 9.56579e-07, 0.99999976, 2.255123e-07, -25.181286, 5.018544, -13.276488)
 mesh = SubResource("PlaneMesh_7q7f3")
 surface_material_override/0 = SubResource("StandardMaterial3D_xpxyj")
 
@@ -181,19 +185,30 @@ spot_angle = 54.843742
 
 [node name="tabletennis" parent="." unique_id=1392886218 instance=ExtResource("1_tbfs4")]
 
-[node name="paddle" parent="." unique_id=1687493890 node_paths=PackedStringArray("paddle") instance=ExtResource("2_viyde")]
-transform = Transform3D(-0.18250343, 0.9832052, 0, -0.9832052, -0.18250343, 0, 0, 0, 1, 3.2253857, 2.405392, -0.6348515)
+[node name="paddle" parent="." unique_id=1687493890 instance=ExtResource("2_viyde")]
+transform = Transform3D(0.9293762, 0, -0.36913365, 0, 0.9999999, 0, 0.36913365, 0, 0.9293763, 3.2253857, 2.405392, -0.6348515)
 script = ExtResource("7_bx18w")
-paddle = NodePath(".")
 
-[node name="Camera3D" type="Camera3D" parent="." unique_id=511995007]
-transform = Transform3D(0.01485694, -0.26549032, 0.963999, 0, 0.9641054, 0.26551962, -0.9998896, -0.003944809, 0.014323656, 6.3495035, 4.0597095, 0.0065959394)
+[node name="Playable_area" type="MeshInstance3D" parent="." unique_id=1386796826]
+transform = Transform3D(1.8845501, 0, -3.7252903e-09, -3.4752652e-08, 1.0000001, 0, -8.688163e-09, 4.656613e-10, 2.8709247, 3.4100254, 2.122331, 0.04339399)
+visible = false
+mesh = SubResource("PlaneMesh_8ttl3")
+
+[node name="Player_data" type="Node3D" parent="." unique_id=510400244]
+
+[node name="Anchor" type="Node3D" parent="Player_data" unique_id=1833280786]
+transform = Transform3D(0.014856944, -0.26549035, 0.96399903, -8.978932e-10, 0.9641057, 0.2655196, -0.99988985, -0.0039448105, 0.014323657, 6.3495035, 0.085748434, 0.0065959375)
+script = ExtResource("8_8f4wj")
+
+[node name="Camera3D" type="Camera3D" parent="Player_data/Anchor" unique_id=511995007]
+transform = Transform3D(0.99999976, 0, 0, 0, 0.9999997, 0, 0, 0, 0.99999994, 0, 3.8313165, 1.0551643)
 environment = SubResource("Environment_84whp")
 attributes = SubResource("CameraAttributesPractical_ercef")
 compositor = SubResource("Compositor_7q7f3")
 fov = 80.5
+script = ExtResource("9_4aspj")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Camera3D" unique_id=2140364007]
+[node name="Shader" type="MeshInstance3D" parent="Player_data/Anchor/Camera3D" unique_id=2140364007]
 transform = Transform3D(1.0000002, -9.313226e-10, 1.8626451e-09, 0, 1.0000002, 1.5279511e-09, 0, 6.114351e-08, 1.0000002, -0.0024892911, -0.04914713, -0.1873045)
 material_override = SubResource("ShaderMaterial_84whp")
 mesh = SubResource("QuadMesh_7q7f3")
