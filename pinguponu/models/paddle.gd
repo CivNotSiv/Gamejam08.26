@@ -7,7 +7,7 @@ extends Node3D
 @export var max_z := 3.7
 
 func _physics_process(delta: float) -> void:
-	Input.mouse_mode = Input.MOUSE_MODE_CONFINED_HIDDEN
+	#Input.mouse_mode = Input.MOUSE_MODE_CONFINED_HIDDEN
 	var cam := get_node("../Camera3D") as Camera3D
 	var mousepos := get_viewport().get_mouse_position()
 	var origin_ray : Vector3 = cam.project_ray_origin(mousepos)

@@ -7,6 +7,9 @@
 [ext_resource type="PackedScene" uid="uid://cuj80dylkk77y" path="res://models/tabletennis.tscn" id="5_2rhnf"]
 [ext_resource type="PackedScene" uid="uid://khx7hhse0gc2" path="res://models/paddle.tscn" id="6_kgkjd"]
 [ext_resource type="Shader" uid="uid://bpekg3jkirhnd" path="res://shaders/pixelize.gdshader" id="7_ugm21"]
+[ext_resource type="PackedScene" uid="uid://ukubjxo7sad8" path="res://models/menu_screens/title.glb" id="8_ijwbo"]
+[ext_resource type="PackedScene" uid="uid://c7j3knpjb3xsa" path="res://models/menu_screens/play_button.glb" id="9_2rhnf"]
+[ext_resource type="PackedScene" uid="uid://dlg2k8p3g7k8q" path="res://models/menu_screens/exit_game.glb" id="10_kgkjd"]
 
 [sub_resource type="Environment" id="Environment_7q7f3"]
 
@@ -197,3 +200,12 @@ fov = 80.5
 transform = Transform3D(1.0000002, -9.313226e-10, 1.8626451e-09, 0, 1.0000002, 1.5279511e-09, 0, 6.114351e-08, 1.0000002, -0.0024892911, -0.04914713, -0.1873045)
 material_override = SubResource("ShaderMaterial_84whp")
 mesh = SubResource("QuadMesh_7q7f3")
+
+[node name="title" parent="." unique_id=1637126010 instance=ExtResource("8_ijwbo")]
+transform = Transform3D(-0.0019810623, 0.9999972, 0.0013020764, 0, 0.001302079, -0.99999917, -0.99999803, -0.0019810607, -2.5794996e-06, 0.369, 4.2, 3.244)
+
+[node name="play_button" parent="." unique_id=442769775 instance=ExtResource("9_2rhnf")]
+transform = Transform3D(-4.371139e-08, 1, 0, 4.371139e-08, 1.9106855e-15, -1, -1, -4.371139e-08, -4.371139e-08, 0.3, 3.2, 3.218)
+
+[node name="exit_game" parent="." unique_id=973250370 instance=ExtResource("10_kgkjd")]
+transform = Transform3D(-4.371139e-08, 1, 0, 4.371139e-08, 1.9106855e-15, -1, -1, -4.371139e-08, -4.371139e-08, 0.3, 2.2, 3.2)
