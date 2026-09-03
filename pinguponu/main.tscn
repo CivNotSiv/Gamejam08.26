@@ -1,7 +1,17 @@
 [gd_scene format=3 uid="uid://biviet28mcidr"]
 
 [ext_resource type="PackedScene" uid="uid://dar7dpy861ycm" path="res://levels/world_1.tscn" id="1_ig7tw"]
+[ext_resource type="Script" uid="uid://bel8se8j1avkl" path="res://levels/world_1.gd" id="2_h2yge"]
+[ext_resource type="PackedScene" uid="uid://bwn22n8bw0qg1" path="res://Entities/balls.tscn" id="3_1bvp3"]
 
 [node name="Main" type="Node3D" unique_id=1114358328]
 
+[node name="GameController" type="Node" parent="." unique_id=1325272589]
+
 [node name="world_1" parent="." unique_id=1190206886 instance=ExtResource("1_ig7tw")]
+script = ExtResource("2_h2yge")
+
+[node name="balls" parent="." unique_id=2017393418 instance=ExtResource("3_1bvp3")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -3.131247, 0.47039914, 0)
+
+[node name="Timer" type="Timer" parent="." unique_id=708294448]

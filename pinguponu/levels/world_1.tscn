@@ -9,7 +9,7 @@
 [ext_resource type="Script" uid="uid://115c4ek0y4k" path="res://levels/table.gd" id="5_4aspj"]
 [ext_resource type="Texture2D" uid="uid://b6kbvb32wcwxs" path="res://textures/Metal028.png" id="5_7ab5j"]
 [ext_resource type="Texture2D" uid="uid://5j5ckbjveo5t" path="res://textures/wall.jpg" id="6_n5ceu"]
-[ext_resource type="Script" uid="uid://b3oh35llc2sr6" path="res://models/paddle.gd" id="7_bx18w"]
+[ext_resource type="Script" uid="uid://cjr0aa2muq3ip" path="res://levels/player.gd" id="8_6r8k1"]
 [ext_resource type="Script" uid="uid://72idn834w2ej" path="res://levels/tilt.gd" id="8_8f4wj"]
 [ext_resource type="Script" uid="uid://c4befumujvm8b" path="res://levels/camera_3d.gd" id="9_4aspj"]
 
@@ -72,6 +72,9 @@ albedo_texture = ExtResource("5_7ab5j")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_yppna"]
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_2aw3g"]
+size = Vector3(0.43078613, 0.37976074, 0.59472656)
+
 [sub_resource type="PlaneMesh" id="PlaneMesh_8ttl3"]
 
 [sub_resource type="Environment" id="Environment_84whp"]
@@ -133,7 +136,7 @@ mesh = SubResource("PlaneMesh_7q7f3")
 surface_material_override/0 = SubResource("StandardMaterial3D_xpxyj")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="crowd" unique_id=1683867354]
-transform = Transform3D(10.941989, -8.742276e-08, 4.5102468e-07, 9.565791e-07, 4.3711374e-08, -5.1591215, 9.56579e-07, 0.99999976, 2.255123e-07, -3.1619673, 5.018544, -13.276488)
+transform = Transform3D(10.941989, -8.742276e-08, 4.5102468e-07, 9.565791e-07, 4.3711374e-08, -5.1591215, 9.56579e-07, 0.99999976, 2.255123e-07, -3.9084787, 5.018544, -13.363546)
 mesh = SubResource("PlaneMesh_7q7f3")
 surface_material_override/0 = SubResource("StandardMaterial3D_xpxyj")
 
@@ -143,7 +146,7 @@ mesh = SubResource("PlaneMesh_7q7f3")
 surface_material_override/0 = SubResource("StandardMaterial3D_xpxyj")
 
 [node name="MeshInstance3D5" type="MeshInstance3D" parent="crowd" unique_id=302237356]
-transform = Transform3D(4.782895e-07, 0.99999976, 2.2551234e-07, 9.565791e-07, 4.3711374e-08, -5.1591215, -10.941989, 4.371138e-08, -4.5102476e-07, -29.67281, 5.018544, 11.370148)
+transform = Transform3D(4.782895e-07, 0.99999976, 2.2551234e-07, 9.565791e-07, 4.3711374e-08, -5.1591215, -10.941989, 4.371138e-08, -4.5102476e-07, -30.500128, 5.018544, 10.468283)
 mesh = SubResource("PlaneMesh_7q7f3")
 surface_material_override/0 = SubResource("StandardMaterial3D_xpxyj")
 
@@ -188,7 +191,7 @@ light_energy = 3.271
 light_specular = 0.0
 
 [node name="stick" type="MeshInstance3D" parent="light" unique_id=143784082]
-transform = Transform3D(0.2, 0, 0, 0, -1.9001843, 1.7484549e-08, 0, -1.661194e-07, -0.19999993, 0, 6.016021, 0)
+transform = Transform3D(0.2, 0, 0, 0, -5.0461574, 1.7484547e-08, 0, -4.4114915e-07, -0.1999999, 0, 9.058355, 0)
 material_override = SubResource("StandardMaterial3D_7ab5j")
 mesh = SubResource("CylinderMesh_84whp")
 
@@ -207,16 +210,20 @@ script = ExtResource("5_4aspj")
 transform = Transform3D(6.6161447, 0, 0, 0, 0.21250033, 0, 0, 0, 3.6923766, 0, 1.7391019, 0)
 shape = SubResource("BoxShape3D_8ttl3")
 
-[node name="CharacterBody3D" type="CharacterBody3D" parent="." unique_id=1030323608]
+[node name="player" type="CharacterBody3D" parent="." unique_id=1030323608]
 transform = Transform3D(0.9293762, 0, -0.36913365, 0, 0.9999999, 0, 0.36913365, 0, 0.9293763, 3.2253857, 2.405392, -0.6348515)
+script = ExtResource("8_6r8k1")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D" unique_id=178492984]
+[node name="face" type="CollisionShape3D" parent="player" unique_id=178492984]
 transform = Transform3D(0.35117286, 0.0167153, 0.16746147, -0.07877256, 0.08712185, -0.002079354, -0.14954728, -0.006639051, 0.39433494, 0.10391879, 0.05904126, -0.04127431)
 shape = SubResource("BoxShape3D_yppna")
 
-[node name="paddle" parent="CharacterBody3D" unique_id=1687493890 instance=ExtResource("2_viyde")]
+[node name="handle" type="CollisionShape3D" parent="player" unique_id=1777052289]
+transform = Transform3D(0.165373, 0, 0.20602642, 0, 0.21107584, 0, -0.069637135, 0, 0.48926774, 0.2522595, 0.044552326, 0.31189752)
+shape = SubResource("BoxShape3D_2aw3g")
+
+[node name="paddle" parent="player" unique_id=1687493890 instance=ExtResource("2_viyde")]
 transform = Transform3D(1, 0, 2.9802322e-08, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-script = ExtResource("7_bx18w")
 
 [node name="Playable_area" type="MeshInstance3D" parent="." unique_id=1386796826]
 transform = Transform3D(1.8845501, 0, -3.7252903e-09, -3.4752652e-08, 1.0000001, 0, -8.688163e-09, 4.656613e-10, 2.8709247, 3.4100254, 2.122331, 0.04339399)
@@ -241,3 +248,8 @@ script = ExtResource("9_4aspj")
 transform = Transform3D(1.0000002, -9.313226e-10, 1.8626451e-09, 0, 1.0000002, 1.5279511e-09, 0, 6.114351e-08, 1.0000002, -0.0024892911, -0.04914713, -0.1873045)
 material_override = SubResource("ShaderMaterial_84whp")
 mesh = SubResource("QuadMesh_7q7f3")
+
+[node name="SpawnTimer" type="Timer" parent="." unique_id=1491382602]
+
+[node name="SpawnPoint" type="Node3D" parent="." unique_id=71520684]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.8912115, 2.5230665, -0.2771387)
