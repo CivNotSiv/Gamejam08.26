@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://12dt2d7tcemp"]
 
 [ext_resource type="Texture2D" uid="uid://5j5ckbjveo5t" path="res://textures/wall.jpg" id="1_mavnb"]
+[ext_resource type="Script" uid="uid://ie20eauf2xeb" path="res://Scripts/intro.gd" id="1_ugm21"]
 [ext_resource type="Texture2D" uid="uid://cgnvin16wbulw" path="res://textures/floor.jpg" id="2_o027c"]
 [ext_resource type="Texture2D" uid="uid://1jat2kt721fr" path="res://textures/crowd.png" id="3_1c7jj"]
 [ext_resource type="Texture2D" uid="uid://b6kbvb32wcwxs" path="res://textures/Metal028.png" id="4_ijwbo"]
@@ -9,7 +10,9 @@
 [ext_resource type="Shader" uid="uid://bpekg3jkirhnd" path="res://shaders/pixelize.gdshader" id="7_ugm21"]
 [ext_resource type="PackedScene" uid="uid://ukubjxo7sad8" path="res://models/menu_screens/title.glb" id="8_ijwbo"]
 [ext_resource type="PackedScene" uid="uid://c7j3knpjb3xsa" path="res://models/menu_screens/play_button.glb" id="9_2rhnf"]
+[ext_resource type="Script" uid="uid://bi1q43auglhgi" path="res://Scripts/play_button.gd" id="9_kgkjd"]
 [ext_resource type="PackedScene" uid="uid://dlg2k8p3g7k8q" path="res://models/menu_screens/exit_game.glb" id="10_kgkjd"]
+[ext_resource type="Script" uid="uid://23mj2eau6u3g" path="res://scripts/exit_button.gd" id="12_wkokw"]
 
 [sub_resource type="Environment" id="Environment_7q7f3"]
 
@@ -91,7 +94,14 @@ shader_parameter/pixel_size = 7
 
 [sub_resource type="QuadMesh" id="QuadMesh_7q7f3"]
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_ecmqv"]
+size = Vector3(8.4, 0.5, 1.1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ngd01"]
+size = Vector3(4.2, 0.5, 0.8)
+
 [node name="menu_world" type="Node3D" unique_id=1190206886]
+script = ExtResource("1_ugm21")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1529777137]
 environment = SubResource("Environment_7q7f3")
@@ -201,11 +211,41 @@ transform = Transform3D(1.0000002, -9.313226e-10, 1.8626451e-09, 0, 1.0000002, 1
 material_override = SubResource("ShaderMaterial_84whp")
 mesh = SubResource("QuadMesh_7q7f3")
 
-[node name="title" parent="." unique_id=1637126010 instance=ExtResource("8_ijwbo")]
-transform = Transform3D(-0.0019810623, 0.9999972, 0.0013020764, 0, 0.001302079, -0.99999917, -0.99999803, -0.0019810607, -2.5794996e-06, 0.369, 4.2, 3.244)
+[node name="title" type="Area3D" parent="." unique_id=1449479835]
+transform = Transform3D(-4.371139e-08, 1, 0, 4.371139e-08, 1.9106855e-15, -1, -1, -4.371139e-08, -4.371139e-08, 0.4, 4, 3.5)
 
-[node name="play_button" parent="." unique_id=442769775 instance=ExtResource("9_2rhnf")]
-transform = Transform3D(-4.371139e-08, 1, 0, 4.371139e-08, 1.9106855e-15, -1, -1, -4.371139e-08, -4.371139e-08, 0.3, 3.2, 3.218)
+[node name="title_model" parent="title" unique_id=1637126010 instance=ExtResource("8_ijwbo")]
 
-[node name="exit_game" parent="." unique_id=973250370 instance=ExtResource("10_kgkjd")]
-transform = Transform3D(-4.371139e-08, 1, 0, 4.371139e-08, 1.9106855e-15, -1, -1, -4.371139e-08, -4.371139e-08, 0.3, 2.2, 3.2)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="title" unique_id=256500399]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.2696075, -0.28910905, -0.48594856)
+shape = SubResource("BoxShape3D_ecmqv")
+
+[node name="play_button" type="Area3D" parent="." unique_id=1730478738]
+transform = Transform3D(-4.371139e-08, 1, 0, 4.371139e-08, 1.9106855e-15, -1, -1, -4.371139e-08, -4.371139e-08, 0.4, 3, 3.2)
+script = ExtResource("9_kgkjd")
+
+[node name="play_button_model" parent="play_button" unique_id=442769775 instance=ExtResource("9_2rhnf")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="play_button" unique_id=1876115755]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1197486, 8.940697e-08, -0.3561659)
+shape = SubResource("BoxShape3D_ngd01")
+
+[node name="exit_button" type="Area3D" parent="." unique_id=997789681]
+transform = Transform3D(-4.371139e-08, 1, 0, 4.371139e-08, 1.9106855e-15, -1, -1, -4.371139e-08, -4.371139e-08, 0.4, 2, 3.2)
+script = ExtResource("12_wkokw")
+
+[node name="exit_game_model" parent="exit_button" unique_id=973250370 instance=ExtResource("10_kgkjd")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="exit_button" unique_id=1241395874]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1197486, 8.940697e-08, -0.3561659)
+shape = SubResource("BoxShape3D_ngd01")
+
+[connection signal="input_event" from="play_button" to="play_button" method="_on_input_event"]
+[connection signal="mouse_entered" from="play_button" to="play_button" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="play_button" to="play_button" method="_on_mouse_exited"]
+[connection signal="input_event" from="exit_button" to="exit_button" method="_on_input_event"]
+[connection signal="mouse_entered" from="exit_button" to="exit_button" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="exit_button" to="exit_button" method="_on_mouse_exited"]
+
+[editable path="play_button/play_button_model"]
+[editable path="exit_button/exit_game_model"]
