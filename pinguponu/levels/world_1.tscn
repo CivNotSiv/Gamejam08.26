@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://cgnvin16wbulw" path="res://textures/floor.jpg" id="1_1asa0"]
 [ext_resource type="Script" uid="uid://bel8se8j1avkl" path="res://levels/world_1.gd" id="1_1qaao"]
 [ext_resource type="PackedScene" uid="uid://cuj80dylkk77y" path="res://models/tabletennis.tscn" id="1_tbfs4"]
+[ext_resource type="Script" uid="uid://bel8se8j1avkl" path="res://levels/world_1.gd" id="1_uc2ke"]
 [ext_resource type="Script" uid="uid://3wnxnpyyhmrw" path="res://levels/floor.gd" id="2_6r8k1"]
 [ext_resource type="PackedScene" uid="uid://khx7hhse0gc2" path="res://models/paddle.tscn" id="2_viyde"]
 [ext_resource type="Texture2D" uid="uid://1jat2kt721fr" path="res://textures/crowd.png" id="3_n5ceu"]
@@ -19,6 +20,11 @@
 [ext_resource type="Texture2D" uid="uid://c2seagg44xehk" path="res://textures/boss/PingPong_Charge.png" id="15_uc2ke"]
 [ext_resource type="Texture2D" uid="uid://dn6k3stuxnk0q" path="res://textures/boss/PingPong_Strike.png" id="16_ivm7e"]
 [ext_resource type="PackedScene" uid="uid://bwn22n8bw0qg1" path="res://Entities/balls.tscn" id="18_uc2ke"]
+[ext_resource type="PackedScene" uid="uid://cuek18ovseejp" path="res://levels/pause_screen.tscn" id="13_1qaao"]
+[ext_resource type="Script" uid="uid://bg3h4kxas5v1q" path="res://scripts/pause_screen.gd" id="14_uc2ke"]
+[ext_resource type="Script" uid="uid://b5b3mrc5f32fn" path="res://scripts/continue.gd" id="15_ivm7e"]
+[ext_resource type="Script" uid="uid://bfya3tklaowcf" path="res://scripts/main_menu.gd" id="16_1jfbe"]
+[ext_resource type="Script" uid="uid://o0pthcvdt0g4" path="res://scripts/restart_stage.gd" id="17_qx8j2"]
 
 [sub_resource type="Environment" id="Environment_7q7f3"]
 
@@ -128,6 +134,7 @@ albedo_texture = ExtResource("16_ivm7e")
 
 [node name="world_1" type="Node3D" unique_id=1190206886]
 script = ExtResource("1_1qaao")
+script = ExtResource("1_uc2ke")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1529777137]
 environment = SubResource("Environment_7q7f3")
@@ -304,3 +311,22 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.17388535, 2.785409, -0.7006
 
 [node name="balls" parent="Westwood" unique_id=2017393418 instance=ExtResource("18_uc2ke")]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 15.543863, -0.34533727, 0)
+[node name="SpawnPoint" type="Node3D" parent="." unique_id=71520684]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.8912115, 2.5230665, -0.2771387)
+
+[node name="pause_menu" parent="." unique_id=1460462413 instance=ExtResource("13_1qaao")]
+process_mode = 3
+visible = false
+script = ExtResource("14_uc2ke")
+
+[node name="continue_button" parent="pause_menu" index="0" unique_id=243382887]
+transform = Transform3D(-4.8082526e-08, 1.1, -4.8082526e-08, 0, -4.8082526e-08, -1.1, -1.1, -4.8082526e-08, 2.101754e-15, 0.4, 3.8, 3.2)
+script = ExtResource("15_ivm7e")
+
+[node name="main_menu_button" parent="pause_menu" index="1" unique_id=150256637]
+script = ExtResource("16_1jfbe")
+
+[node name="restart_stage_button" parent="pause_menu" index="3" unique_id=1271775593]
+script = ExtResource("17_qx8j2")
+
+[editable path="pause_menu"]

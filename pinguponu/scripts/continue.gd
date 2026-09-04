@@ -1,9 +1,9 @@
 extends Area3D
 
 signal menu_pressed(action: String)
-@export var action_name: String = "exit"
+@export var action_name: String = "continue"
 
-@onready var mesh_instance: MeshInstance3D = $"exit_game_model/Text"
+@onready var mesh_instance: MeshInstance3D = $"continue/Text"
 var hover_material: StandardMaterial3D
 
 func _ready() -> void:
@@ -24,7 +24,7 @@ func _on_input_event(_camera, event, _position, _normal, _shape_idx):
 func _on_mouse_entered():
 	mesh_instance.set_surface_override_material(0, hover_material)
 	var tween = create_tween().set_parallel(true)
-	tween.tween_property(self, "scale", Vector3(1.1, 1.1, 1.1), 0.15)
+	tween.tween_property(self, "scale", Vector3(1.1, 1.1, 1.1), 0.10)
 	tween.tween_property(hover_material, "emission_energy_multiplier", 2.0, 0.15)
 
 func _on_mouse_exited():
