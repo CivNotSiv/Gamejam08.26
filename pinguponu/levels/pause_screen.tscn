@@ -1,0 +1,60 @@
+[gd_scene format=3 uid="uid://cuek18ovseejp"]
+
+[ext_resource type="PackedScene" uid="uid://bboi68758maht" path="res://models/menu_screens/paused_game.glb" id="4_hd3b7"]
+[ext_resource type="PackedScene" uid="uid://bv7yoq2aq5wys" path="res://models/menu_screens/continue.glb" id="5_1cnpa"]
+[ext_resource type="PackedScene" uid="uid://bgqbegha62xyb" path="res://models/menu_screens/restart_stage.glb" id="6_qrdf0"]
+[ext_resource type="PackedScene" uid="uid://b12585bxdt70u" path="res://models/menu_screens/main_menu.glb" id="7_tq1pg"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1u26f"]
+size = Vector3(3.2, 0.5, 0.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_pj0fx"]
+size = Vector3(4.4, 0.5, 0.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qa7j5"]
+size = Vector3(6.4, 0.5, 0.7)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6r8k1"]
+size = Vector3(5.4, 0.5, 0.5)
+
+[node name="Node3D" type="Node3D" unique_id=1460462413]
+
+[node name="continue_button" type="Area3D" parent="." unique_id=243382887]
+transform = Transform3D(-4.371139e-08, 1, 0, 4.371139e-08, 1.9106855e-15, -1, -1, -4.371139e-08, -4.371139e-08, 0.4, 3.8, 3.2)
+
+[node name="continue" parent="continue_button" unique_id=1335241461 instance=ExtResource("5_1cnpa")]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="continue_button" unique_id=584846937]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6311696, 1.4901161e-07, -0.2789836)
+shape = SubResource("BoxShape3D_1u26f")
+debug_color = Color(0.9390508, 0.11451896, 0.55637765, 0.41960785)
+
+[node name="main_menu_button" type="Area3D" parent="." unique_id=150256637]
+transform = Transform3D(-3.4969112e-08, 0.8, 0, 3.4969112e-08, 1.5285484e-15, -0.8, -0.8, -3.4969112e-08, -3.4969112e-08, 0.4, 2.4, 3.2)
+
+[node name="main_menu" parent="main_menu_button" unique_id=1363199482 instance=ExtResource("7_tq1pg")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="main_menu_button" unique_id=263634612]
+transform = Transform3D(1, 0, 0, 0, 1, -6.352747e-22, 0, -6.352747e-22, 1, 2.2547731, 8.940697e-08, -0.28549576)
+shape = SubResource("BoxShape3D_pj0fx")
+debug_color = Color(0.9267635, 0.14781016, 0.5659973, 0.41960785)
+
+[node name="paused_game_button" type="Area3D" parent="." unique_id=1226103044]
+transform = Transform3D(-3.4969112e-08, 0.8, 0, 3.4969112e-08, 1.5285484e-15, -0.8, -0.8, -3.4969112e-08, -3.4969112e-08, 0.4, 4.5, 3.7)
+
+[node name="paused_game" parent="paused_game_button" unique_id=1458648654 instance=ExtResource("4_hd3b7")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="paused_game_button" unique_id=740523361]
+transform = Transform3D(1, 0, 0, 0, 1, -1.0587912e-21, 0, -1.0587912e-21, 1, 3.3773623, 1.4901161e-07, -0.42225313)
+shape = SubResource("BoxShape3D_qa7j5")
+debug_color = Color(0.9090636, 0, 0.5372473, 0.41960785)
+
+[node name="restart_stage_button" type="Area3D" parent="." unique_id=1271775593]
+transform = Transform3D(-3.4969112e-08, 0.8, 0, 3.4969112e-08, 1.5285484e-15, -0.8, -0.8, -3.4969112e-08, -3.4969112e-08, 0.4, 3.1, 3.2)
+
+[node name="restart_stage" parent="restart_stage_button" unique_id=1705401152 instance=ExtResource("6_qrdf0")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="restart_stage_button" unique_id=121637572]
+transform = Transform3D(1, 0, 0, 0, 1, -6.352747e-22, 0, -6.352747e-22, 1, 2.6284194, 1.1920929e-07, -0.27247977)
+shape = SubResource("BoxShape3D_6r8k1")

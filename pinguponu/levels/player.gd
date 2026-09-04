@@ -3,7 +3,7 @@ extends Node3D
 @onready var cam: Camera3D = $"../Player_data/Anchor/Camera3D"
 @onready var playable_area: MeshInstance3D = $"../Playable_area"
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CONFINED_HIDDEN
 
 	var mouse_pos: Vector2 = get_viewport().get_mouse_position()
