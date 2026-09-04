@@ -47,10 +47,7 @@ func _physics_process(delta: float) -> void:
 		look_at(Vector3((size.x / 2), 1, 0))
 
 func _on_body_entered(body: Node3D) -> void:
-	if body.name == "Table":
-		return
-	crowd_jump.emit()
+	crowd_jump.emit(0.5)
 	var body_rigid := body as RigidBody3D
 	if body_rigid:
 		body_rigid.linear_velocity = Vector3(-40, 0, 0)
-		print("collision!!")

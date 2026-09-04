@@ -14,11 +14,21 @@ emission = Color(1, 1, 1, 1)
 [sub_resource type="SphereMesh" id="SphereMesh_lquwl"]
 material = SubResource("StandardMaterial3D_uwude")
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_48lqx"]
+emission_enabled = true
+emission = Color(1, 0, 0, 1)
+emission_energy_multiplier = 16.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_8ttl3"]
+material = SubResource("StandardMaterial3D_48lqx")
+
 [node name="balls" type="Node3D" unique_id=2017393418]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
 
 [node name="basic2" type="RigidBody3D" parent="." unique_id=377327017]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -1.5726453, -6.4630585)
+collision_layer = 17
+collision_mask = 3
 mass = 0.026
 physics_material_override = SubResource("PhysicsMaterial_h2yge")
 script = ExtResource("1_uwude")
@@ -29,3 +39,18 @@ shape = SubResource("SphereShape3D_1bvp3")
 [node name="ball_white" type="MeshInstance3D" parent="basic2" unique_id=2069339221]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 mesh = SubResource("SphereMesh_lquwl")
+
+[node name="evil4" type="RigidBody3D" parent="." unique_id=848434430]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -1.5726453, -6.4630585)
+collision_layer = 17
+collision_mask = 3
+mass = 0.026
+physics_material_override = SubResource("PhysicsMaterial_h2yge")
+script = ExtResource("1_uwude")
+
+[node name="collision" type="CollisionShape3D" parent="evil4" unique_id=1676599448]
+shape = SubResource("SphereShape3D_1bvp3")
+
+[node name="red_ball" type="MeshInstance3D" parent="evil4" unique_id=324659983]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+mesh = SubResource("SphereMesh_8ttl3")
