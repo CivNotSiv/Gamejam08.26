@@ -1,11 +1,18 @@
 [gd_scene format=3 uid="uid://bwn22n8bw0qg1"]
 
+[ext_resource type="Script" uid="uid://b5tyl6nkqwmj7" path="res://Entities/basic_2.gd" id="1_uwude"]
+
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_h2yge"]
-bounce = 1.5
+bounce = 0.8
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_1bvp3"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uwude"]
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+
 [sub_resource type="SphereMesh" id="SphereMesh_lquwl"]
+material = SubResource("StandardMaterial3D_uwude")
 
 [node name="balls" type="Node3D" unique_id=2017393418]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
@@ -14,6 +21,7 @@ transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -1.5726453, -6.4630585)
 mass = 0.026
 physics_material_override = SubResource("PhysicsMaterial_h2yge")
+script = ExtResource("1_uwude")
 
 [node name="collision" type="CollisionShape3D" parent="basic2" unique_id=11894649]
 shape = SubResource("SphereShape3D_1bvp3")
