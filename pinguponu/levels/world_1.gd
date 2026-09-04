@@ -11,6 +11,7 @@ extends Node
 @export var ball_scene: PackedScene = preload("res://Entities/balls.tscn")
 
 var default_anchor_transform: Transform3D
+var pause_fog: float = 0.3451
 var default_fov: float
 
 func _ready() -> void:
@@ -33,6 +34,7 @@ func toggle_pause() -> void:
 	if pause_menu.visible == true:
 		anchor.transform = default_anchor_transform
 		camera.fov = default_fov
+		camera.environment.volumetric_fog_density = pause_fog
 		Input.mouse_mode = Input.MOUSE_MODE_CONFINED
 	else:
 		Input.mouse_mode = Input.MOUSE_MODE_CONFINED_HIDDEN

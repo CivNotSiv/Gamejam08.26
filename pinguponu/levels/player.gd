@@ -3,6 +3,8 @@ extends Node3D
 @onready var cam: Camera3D = $"../Player_data/Anchor/Camera3D"
 @onready var playable_area: MeshInstance3D = $"../Playable_area"
 
+signal crowd_jump
+
 func _ready() -> void:
 	$Area3D.body_entered.connect(_on_body_entered)
 
@@ -45,6 +47,9 @@ func _physics_process(delta: float) -> void:
 		look_at(Vector3((size.x / 2), 1, 0))
 
 func _on_body_entered(body: Node3D) -> void:
+	if body.name == "Table":
+		return
+	crowd_jump.emit()
 	var body_rigid := body as RigidBody3D
 	if body_rigid:
 		body_rigid.linear_velocity = Vector3(-40, 0, 0)

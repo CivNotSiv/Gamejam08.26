@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://dar7dpy861ycm"]
 
 [ext_resource type="Texture2D" uid="uid://cgnvin16wbulw" path="res://textures/floor.jpg" id="1_1asa0"]
-[ext_resource type="Script" uid="uid://bel8se8j1avkl" path="res://levels/world_1.gd" id="1_1qaao"]
 [ext_resource type="PackedScene" uid="uid://cuj80dylkk77y" path="res://models/tabletennis.tscn" id="1_tbfs4"]
 [ext_resource type="Script" uid="uid://bel8se8j1avkl" path="res://levels/world_1.gd" id="1_uc2ke"]
 [ext_resource type="Script" uid="uid://3wnxnpyyhmrw" path="res://levels/floor.gd" id="2_6r8k1"]
+[ext_resource type="Texture2D" uid="uid://cxqt1586j1kul" path="res://textures/seamless-grey-bare-concrete-wall-texture-free-photo.jpg" id="2_uhqol"]
 [ext_resource type="PackedScene" uid="uid://khx7hhse0gc2" path="res://models/paddle.tscn" id="2_viyde"]
 [ext_resource type="Texture2D" uid="uid://1jat2kt721fr" path="res://textures/crowd.png" id="3_n5ceu"]
 [ext_resource type="Shader" uid="uid://bpekg3jkirhnd" path="res://shaders/pixelize.gdshader" id="4_7ab5j"]
@@ -15,22 +15,25 @@
 [ext_resource type="Script" uid="uid://cjr0aa2muq3ip" path="res://levels/player.gd" id="8_6r8k1"]
 [ext_resource type="Script" uid="uid://72idn834w2ej" path="res://levels/tilt.gd" id="8_8f4wj"]
 [ext_resource type="Script" uid="uid://c4befumujvm8b" path="res://levels/camera_3d.gd" id="9_4aspj"]
+[ext_resource type="PackedScene" uid="uid://cuek18ovseejp" path="res://levels/pause_screen.tscn" id="13_1qaao"]
 [ext_resource type="Script" uid="uid://dosygxy4fjmpx" path="res://levels/animation.gd" id="13_v0ddp"]
 [ext_resource type="Texture2D" uid="uid://ccqqr81eqlr2c" path="res://textures/boss/PingPong_Idle.png" id="14_1qaao"]
-[ext_resource type="Texture2D" uid="uid://c2seagg44xehk" path="res://textures/boss/PingPong_Charge.png" id="15_uc2ke"]
-[ext_resource type="Texture2D" uid="uid://dn6k3stuxnk0q" path="res://textures/boss/PingPong_Strike.png" id="16_ivm7e"]
-[ext_resource type="PackedScene" uid="uid://bwn22n8bw0qg1" path="res://Entities/balls.tscn" id="18_uc2ke"]
-[ext_resource type="PackedScene" uid="uid://cuek18ovseejp" path="res://levels/pause_screen.tscn" id="13_1qaao"]
 [ext_resource type="Script" uid="uid://bg3h4kxas5v1q" path="res://scripts/pause_screen.gd" id="14_uc2ke"]
 [ext_resource type="Script" uid="uid://b5b3mrc5f32fn" path="res://scripts/continue.gd" id="15_ivm7e"]
+[ext_resource type="Texture2D" uid="uid://c2seagg44xehk" path="res://textures/boss/PingPong_Charge.png" id="15_uc2ke"]
 [ext_resource type="Script" uid="uid://bfya3tklaowcf" path="res://scripts/main_menu.gd" id="16_1jfbe"]
+[ext_resource type="Texture2D" uid="uid://dn6k3stuxnk0q" path="res://textures/boss/PingPong_Strike.png" id="16_ivm7e"]
 [ext_resource type="Script" uid="uid://o0pthcvdt0g4" path="res://scripts/restart_stage.gd" id="17_qx8j2"]
+[ext_resource type="PackedScene" uid="uid://bwn22n8bw0qg1" path="res://Entities/balls.tscn" id="18_uc2ke"]
 
 [sub_resource type="Environment" id="Environment_7q7f3"]
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_84whp"]
 
 [sub_resource type="Compositor" id="Compositor_roulp"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lmqqd"]
+albedo_texture = ExtResource("2_uhqol")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bx18w"]
 albedo_texture = ExtResource("6_n5ceu")
@@ -94,8 +97,11 @@ glow_enabled = true
 glow_intensity = 0.46
 glow_strength = 0.64
 volumetric_fog_enabled = true
-volumetric_fog_density = 0.03
-volumetric_fog_albedo = Color(0.2824075, 0.28240746, 0.28240746, 1)
+volumetric_fog_density = 0.0
+volumetric_fog_albedo = Color(0.6, 0.6, 0.6, 1)
+volumetric_fog_emission_energy = 0.0
+volumetric_fog_detail_spread = 2.4622893
+volumetric_fog_sky_affect = 0.0
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_ercef"]
 exposure_multiplier = 1.712
@@ -133,7 +139,6 @@ alpha_antialiasing_mode = 0
 albedo_texture = ExtResource("16_ivm7e")
 
 [node name="world_1" type="Node3D" unique_id=1190206886]
-script = ExtResource("1_1qaao")
 script = ExtResource("1_uc2ke")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1529777137]
@@ -142,7 +147,8 @@ camera_attributes = SubResource("CameraAttributesPractical_84whp")
 compositor = SubResource("Compositor_roulp")
 
 [node name="Walls" type="MeshInstance3D" parent="." unique_id=1822136883]
-transform = Transform3D(50, 0, 0, 0, 39.94749, 0, 0, 0, 50, -14.346382, -1.219245, 0.6355555)
+transform = Transform3D(50, 0, 0, 0, 39.94749, 0, 0, 0, 50, -14.346382, -5.9824667, 0.6355555)
+material_override = SubResource("StandardMaterial3D_lmqqd")
 mesh = SubResource("BoxMesh_7q7f3")
 
 [node name="floor" type="RigidBody3D" parent="." unique_id=208163002]
@@ -160,7 +166,12 @@ shape = SubResource("BoxShape3D_48lqx")
 script = ExtResource("5_ivm7e")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="crowd" unique_id=2074747451]
-transform = Transform3D(-10.941989, 6.728804e-08, -4.5102468e-07, 9.565791e-07, 4.3711374e-08, -5.1591215, -7.362652e-07, -0.99999976, -2.255124e-07, -3.2294188, 5.1913815, 13.1430435)
+transform = Transform3D(-10.941989, 6.728804e-08, -4.5102468e-07, 9.565791e-07, 4.3711374e-08, -5.1591215, -7.362652e-07, -0.99999976, -2.255124e-07, -2.958027, 5.1913815, 12.33544)
+mesh = SubResource("PlaneMesh_7q7f3")
+surface_material_override/0 = SubResource("StandardMaterial3D_xpxyj")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="crowd" unique_id=528659019]
+transform = Transform3D(-10.941989, 6.728804e-08, -4.5102468e-07, 9.565791e-07, 4.3711374e-08, -5.1591215, -7.362652e-07, -0.99999976, -2.255124e-07, -3.2294188, 6.6318455, 17.00169)
 mesh = SubResource("PlaneMesh_7q7f3")
 surface_material_override/0 = SubResource("StandardMaterial3D_xpxyj")
 
@@ -169,8 +180,18 @@ transform = Transform3D(-10.941989, 6.728804e-08, -4.5102468e-07, 9.565791e-07, 
 mesh = SubResource("PlaneMesh_7q7f3")
 surface_material_override/0 = SubResource("StandardMaterial3D_xpxyj")
 
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="crowd" unique_id=1677603633]
+transform = Transform3D(-10.941989, 6.728804e-08, -4.5102468e-07, 9.565791e-07, 4.3711374e-08, -5.1591215, -7.362652e-07, -0.99999976, -2.255124e-07, -26.942593, 7.2463512, 18.337877)
+mesh = SubResource("PlaneMesh_7q7f3")
+surface_material_override/0 = SubResource("StandardMaterial3D_xpxyj")
+
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="crowd" unique_id=1683867354]
 transform = Transform3D(10.941989, -8.742276e-08, 4.5102468e-07, 9.565791e-07, 4.3711374e-08, -5.1591215, 9.56579e-07, 0.99999976, 2.255123e-07, -3.9084787, 5.018544, -13.363546)
+mesh = SubResource("PlaneMesh_7q7f3")
+surface_material_override/0 = SubResource("StandardMaterial3D_xpxyj")
+
+[node name="MeshInstance3D12" type="MeshInstance3D" parent="crowd" unique_id=956751086]
+transform = Transform3D(10.941989, -8.742276e-08, 4.5102468e-07, 9.565791e-07, 4.3711374e-08, -5.1591215, 9.56579e-07, 0.99999976, 2.255123e-07, -3.9084787, 6.586359, -16.901176)
 mesh = SubResource("PlaneMesh_7q7f3")
 surface_material_override/0 = SubResource("StandardMaterial3D_xpxyj")
 
@@ -179,13 +200,28 @@ transform = Transform3D(10.941989, -8.742276e-08, 4.5102468e-07, 9.565791e-07, 4
 mesh = SubResource("PlaneMesh_7q7f3")
 surface_material_override/0 = SubResource("StandardMaterial3D_xpxyj")
 
+[node name="MeshInstance3D11" type="MeshInstance3D" parent="crowd" unique_id=1041932024]
+transform = Transform3D(10.941989, -8.742276e-08, 4.5102468e-07, 9.565791e-07, 4.3711374e-08, -5.1591215, 9.56579e-07, 0.99999976, 2.255123e-07, -25.181286, 6.781037, -16.77311)
+mesh = SubResource("PlaneMesh_7q7f3")
+surface_material_override/0 = SubResource("StandardMaterial3D_xpxyj")
+
 [node name="MeshInstance3D5" type="MeshInstance3D" parent="crowd" unique_id=302237356]
 transform = Transform3D(4.782895e-07, 0.99999976, 2.2551234e-07, 9.565791e-07, 4.3711374e-08, -5.1591215, -10.941989, 4.371138e-08, -4.5102476e-07, -30.500128, 5.018544, 10.468283)
 mesh = SubResource("PlaneMesh_7q7f3")
 surface_material_override/0 = SubResource("StandardMaterial3D_xpxyj")
 
+[node name="MeshInstance3D9" type="MeshInstance3D" parent="crowd" unique_id=568426067]
+transform = Transform3D(4.782895e-07, 0.99999976, 2.2551234e-07, 9.565791e-07, 4.3711374e-08, -5.1591215, -10.941989, 4.371138e-08, -4.5102476e-07, -36.354004, 7.1698303, 10.468283)
+mesh = SubResource("PlaneMesh_7q7f3")
+surface_material_override/0 = SubResource("StandardMaterial3D_xpxyj")
+
 [node name="MeshInstance3D6" type="MeshInstance3D" parent="crowd" unique_id=836461752]
 transform = Transform3D(4.782895e-07, 0.99999976, 2.2551234e-07, 9.565791e-07, 4.3711374e-08, -5.1591215, -10.941989, 4.371138e-08, -4.5102476e-07, -29.67281, 5.018544, -10.540478)
+mesh = SubResource("PlaneMesh_7q7f3")
+surface_material_override/0 = SubResource("StandardMaterial3D_xpxyj")
+
+[node name="MeshInstance3D10" type="MeshInstance3D" parent="crowd" unique_id=1908735210]
+transform = Transform3D(4.782895e-07, 0.99999976, 2.2551234e-07, 9.565791e-07, 4.3711374e-08, -5.1591215, -10.941989, 4.371138e-08, -4.5102476e-07, -33.41343, 7.100522, -10.540478)
 mesh = SubResource("PlaneMesh_7q7f3")
 surface_material_override/0 = SubResource("StandardMaterial3D_xpxyj")
 
@@ -231,7 +267,7 @@ mesh = SubResource("CylinderMesh_84whp")
 
 [node name="ceiling lights" type="SpotLight3D" parent="." unique_id=326421611]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 15.085638, 0)
-light_energy = 6.037
+light_energy = 1.76
 spot_range = 31.675308
 spot_angle = 54.843742
 
@@ -311,8 +347,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.17388535, 2.785409, -0.7006
 
 [node name="balls" parent="Westwood" unique_id=2017393418 instance=ExtResource("18_uc2ke")]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 15.543863, -0.34533727, 0)
-[node name="SpawnPoint" type="Node3D" parent="." unique_id=71520684]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.8912115, 2.5230665, -0.2771387)
 
 [node name="pause_menu" parent="." unique_id=1460462413 instance=ExtResource("13_1qaao")]
 process_mode = 3
