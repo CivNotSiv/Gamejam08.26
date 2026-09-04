@@ -3,6 +3,9 @@ extends Node3D
 @onready var cam: Camera3D = $"../Player_data/Anchor/Camera3D"
 @onready var playable_area: MeshInstance3D = $"../Playable_area"
 
+func _ready() -> void:
+	$Area3D.body_entered.connect(_on_body_entered)
+
 func _physics_process(delta: float) -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CONFINED_HIDDEN
 
@@ -40,3 +43,9 @@ func _physics_process(delta: float) -> void:
 			get_viewport().warp_mouse(cursor_pos)
 		
 		look_at(Vector3((size.x / 2), 1, 0))
+
+func _on_body_entered(body: Node3D) -> void:
+	var body_rigid := body as RigidBody3D
+	if body_rigid:
+		body_rigid.linear_velocity = Vector3(-40, 0, 0)
+		print("collision!!")

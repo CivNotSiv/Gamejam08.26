@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dar7dpy861ycm"]
 
 [ext_resource type="Texture2D" uid="uid://cgnvin16wbulw" path="res://textures/floor.jpg" id="1_1asa0"]
+[ext_resource type="Script" uid="uid://bel8se8j1avkl" path="res://levels/world_1.gd" id="1_1qaao"]
 [ext_resource type="PackedScene" uid="uid://cuj80dylkk77y" path="res://models/tabletennis.tscn" id="1_tbfs4"]
 [ext_resource type="Script" uid="uid://3wnxnpyyhmrw" path="res://levels/floor.gd" id="2_6r8k1"]
 [ext_resource type="PackedScene" uid="uid://khx7hhse0gc2" path="res://models/paddle.tscn" id="2_viyde"]
@@ -8,10 +9,16 @@
 [ext_resource type="Shader" uid="uid://bpekg3jkirhnd" path="res://shaders/pixelize.gdshader" id="4_7ab5j"]
 [ext_resource type="Script" uid="uid://115c4ek0y4k" path="res://levels/table.gd" id="5_4aspj"]
 [ext_resource type="Texture2D" uid="uid://b6kbvb32wcwxs" path="res://textures/Metal028.png" id="5_7ab5j"]
+[ext_resource type="Script" uid="uid://rjlcik02r4oh" path="res://levels/crowd.gd" id="5_ivm7e"]
 [ext_resource type="Texture2D" uid="uid://5j5ckbjveo5t" path="res://textures/wall.jpg" id="6_n5ceu"]
 [ext_resource type="Script" uid="uid://cjr0aa2muq3ip" path="res://levels/player.gd" id="8_6r8k1"]
 [ext_resource type="Script" uid="uid://72idn834w2ej" path="res://levels/tilt.gd" id="8_8f4wj"]
 [ext_resource type="Script" uid="uid://c4befumujvm8b" path="res://levels/camera_3d.gd" id="9_4aspj"]
+[ext_resource type="Script" uid="uid://dosygxy4fjmpx" path="res://levels/animation.gd" id="13_v0ddp"]
+[ext_resource type="Texture2D" uid="uid://ccqqr81eqlr2c" path="res://textures/boss/PingPong_Idle.png" id="14_1qaao"]
+[ext_resource type="Texture2D" uid="uid://c2seagg44xehk" path="res://textures/boss/PingPong_Charge.png" id="15_uc2ke"]
+[ext_resource type="Texture2D" uid="uid://dn6k3stuxnk0q" path="res://textures/boss/PingPong_Strike.png" id="16_ivm7e"]
+[ext_resource type="PackedScene" uid="uid://bwn22n8bw0qg1" path="res://Entities/balls.tscn" id="18_uc2ke"]
 
 [sub_resource type="Environment" id="Environment_7q7f3"]
 
@@ -71,9 +78,7 @@ albedo_texture = ExtResource("5_7ab5j")
 [sub_resource type="BoxShape3D" id="BoxShape3D_8ttl3"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_yppna"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_2aw3g"]
-size = Vector3(0.43078613, 0.37976074, 0.59472656)
+size = Vector3(1, 1, 1.5753174)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_8ttl3"]
 
@@ -101,7 +106,28 @@ shader_parameter/pixel_size = 5
 
 [sub_resource type="QuadMesh" id="QuadMesh_7q7f3"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1jfbe"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+albedo_texture = ExtResource("14_1qaao")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_roulp"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qx8j2"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+albedo_texture = ExtResource("15_uc2ke")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qieny"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+albedo_texture = ExtResource("16_ivm7e")
+
 [node name="world_1" type="Node3D" unique_id=1190206886]
+script = ExtResource("1_1qaao")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1529777137]
 environment = SubResource("Environment_7q7f3")
@@ -124,6 +150,7 @@ transform = Transform3D(2.396811e-06, 0, 72.2408, 0, 1.0000007, 0, -54.832645, 0
 shape = SubResource("BoxShape3D_48lqx")
 
 [node name="crowd" type="Node3D" parent="." unique_id=1958163842]
+script = ExtResource("5_ivm7e")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="crowd" unique_id=2074747451]
 transform = Transform3D(-10.941989, 6.728804e-08, -4.5102468e-07, 9.565791e-07, 4.3711374e-08, -5.1591215, -7.362652e-07, -0.99999976, -2.255124e-07, -3.2294188, 5.1913815, 13.1430435)
@@ -215,15 +242,17 @@ transform = Transform3D(0.9293762, 0, -0.36913365, 0, 0.9999999, 0, 0.36913365, 
 script = ExtResource("8_6r8k1")
 
 [node name="face" type="CollisionShape3D" parent="player" unique_id=178492984]
-transform = Transform3D(0.35117286, 0.0167153, 0.16746147, -0.07877256, 0.08712185, -0.002079354, -0.14954728, -0.006639051, 0.39433494, 0.10391879, 0.05904126, -0.04127431)
+transform = Transform3D(0.5210237, 0.024834547, 0.26324314, -0.11687225, 0.1294402, -0.0032686666, -0.2218784, -0.009863887, 0.6198796, 0.16010022, 0.05834365, 0.09102082)
 shape = SubResource("BoxShape3D_yppna")
-
-[node name="handle" type="CollisionShape3D" parent="player" unique_id=1777052289]
-transform = Transform3D(0.165373, 0, 0.20602642, 0, 0.21107584, 0, -0.069637135, 0, 0.48926774, 0.2522595, 0.044552326, 0.31189752)
-shape = SubResource("BoxShape3D_2aw3g")
 
 [node name="paddle" parent="player" unique_id=1687493890 instance=ExtResource("2_viyde")]
 transform = Transform3D(1, 0, 2.9802322e-08, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Area3D" type="Area3D" parent="player" unique_id=1938574138]
+
+[node name="face2" type="CollisionShape3D" parent="player/Area3D" unique_id=210578261]
+transform = Transform3D(0.5947974, 0.039512236, 0.31721565, -0.1334206, 0.20594183, -0.003938839, -0.25329503, -0.015693631, 0.74697286, 0.16010022, 0.05834365, 0.09102082)
+shape = SubResource("BoxShape3D_yppna")
 
 [node name="Playable_area" type="MeshInstance3D" parent="." unique_id=1386796826]
 transform = Transform3D(1.8845501, 0, -3.7252903e-09, -3.4752652e-08, 1.0000001, 0, -8.688163e-09, 4.656613e-10, 2.8709247, 3.4100254, 2.122331, 0.04339399)
@@ -251,5 +280,27 @@ mesh = SubResource("QuadMesh_7q7f3")
 
 [node name="SpawnTimer" type="Timer" parent="." unique_id=1491382602]
 
-[node name="SpawnPoint" type="Node3D" parent="." unique_id=71520684]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.8912115, 2.5230665, -0.2771387)
+[node name="Westwood" type="Node3D" parent="." unique_id=1601074117]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.841309, 0, 0)
+script = ExtResource("13_v0ddp")
+
+[node name="idle" type="MeshInstance3D" parent="Westwood" unique_id=404412085]
+transform = Transform3D(-1.16545415e-07, 1.0000001, 0, 1.1654541e-07, 5.4633998e-15, -3.6771982, -2.666248, -4.3711395e-08, -1.6073544e-07, -0.13227081, 3.3019602, 0.46925926)
+material_override = SubResource("StandardMaterial3D_1jfbe")
+mesh = SubResource("PlaneMesh_roulp")
+
+[node name="charge" type="MeshInstance3D" parent="Westwood" unique_id=1701113679]
+transform = Transform3D(-1.16545415e-07, 1.0000001, 0, 1.1654541e-07, 5.4633998e-15, -3.6771982, -2.666248, -4.3711395e-08, -1.6073544e-07, -0.13227081, 3.3019602, 0.46925926)
+material_override = SubResource("StandardMaterial3D_qx8j2")
+mesh = SubResource("PlaneMesh_roulp")
+
+[node name="strike" type="MeshInstance3D" parent="Westwood" unique_id=1311269169]
+transform = Transform3D(-1.16545415e-07, 1.0000001, 0, 1.1654541e-07, 5.4633998e-15, -3.6771982, -2.666248, -4.3711395e-08, -1.6073544e-07, -0.13227081, 3.3019602, 0.46925926)
+material_override = SubResource("StandardMaterial3D_qieny")
+mesh = SubResource("PlaneMesh_roulp")
+
+[node name="SpawnPoint" type="Node3D" parent="Westwood" unique_id=71520684]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.17388535, 2.785409, -0.70067006)
+
+[node name="balls" parent="Westwood" unique_id=2017393418 instance=ExtResource("18_uc2ke")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 15.543863, -0.34533727, 0)
